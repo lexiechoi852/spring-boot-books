@@ -1,5 +1,6 @@
 package com.lexie.springbootjdbc.dao.impl;
 
+import com.lexie.springbootjdbc.TestDataUtil;
 import com.lexie.springbootjdbc.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,11 +23,7 @@ public class BookDaoImplTests {
 
     @Test
     public void shouldCreateBookGeneratesCorrectSql() {
-        Book book = Book.builder()
-                .isbn("978-1-2345-6789-0")
-                .title("The Shadow in the Attic")
-                .authorId(1L)
-                .build();
+        Book book = TestDataUtil.createTestBook();
 
         underTest.create(book);
 
