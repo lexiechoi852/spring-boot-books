@@ -1,10 +1,10 @@
-package com.lexie.springbootjdbc;
+package com.lexie.springbootjpa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootJdbcApplicationTests {
+class SpringBootJpaApplicationTests {
 
 	@Test
 	void contextLoads() {

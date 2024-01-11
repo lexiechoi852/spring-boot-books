@@ -1,4 +1,4 @@
-package com.lexie.springbootjdbc;
+package com.lexie.springbootjpa;
 
 import lombok.extern.java.Log;
 import org.springframework.boot.SpringApplication;
@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Log
-public class SpringBootJdbcApplication {
+public class SpringBootJpaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootJdbcApplication.class, args);
+		SpringApplication.run(SpringBootJpaApplication.class, args);
 	}
 }

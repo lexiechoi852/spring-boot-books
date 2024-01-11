@@ -1,7 +1,7 @@
-package com.lexie.springbootjdbc;
+package com.lexie.springbootjpa;
 
-import com.lexie.springbootjdbc.domain.Author;
-import com.lexie.springbootjdbc.domain.Book;
+import com.lexie.springbootjpa.domain.Author;
+import com.lexie.springbootjpa.domain.Book;
 
 public final class TestDataUtil {
     private TestDataUtil() {
