@@ -1,7 +1,7 @@
-package com.lexie.springbootjpa.repositories;
+package com.lexie.springbootbooks.repositories;
 
-import com.lexie.springbootjpa.TestDataUtil;
-import com.lexie.springbootjpa.domain.Author;
+import com.lexie.springbootbooks.TestDataUtil;
+import com.lexie.springbootbooks.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

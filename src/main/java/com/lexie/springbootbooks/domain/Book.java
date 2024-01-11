@@ -1,4 +1,4 @@
-package com.lexie.springbootjpa.domain;
+package com.lexie.springbootbooks.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

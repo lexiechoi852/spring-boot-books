@@ -1,6 +1,6 @@
-package com.lexie.springbootjpa.repositories;
+package com.lexie.springbootbooks.repositories;
 
-import com.lexie.springbootjpa.domain.Book;
+import com.lexie.springbootbooks.domain.Book;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
