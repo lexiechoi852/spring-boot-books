@@ -9,8 +9,16 @@ public final class TestDataUtil {
     private TestDataUtil() {
     }
 
-    public static AuthorEntity createTestAuthorA() {
+    public static AuthorEntity createTestAuthorEntityA() {
         return AuthorEntity.builder()
+                .id(1L)
+                .name("Abigail Rose")
+                .age(80)
+                .build();
+    }
+
+    public static AuthorDto createTestAuthorDtoA() {
+        return AuthorDto.builder()
                 .id(1L)
                 .name("Abigail Rose")
                 .age(80)

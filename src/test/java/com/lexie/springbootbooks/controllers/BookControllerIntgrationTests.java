@@ -80,7 +80,7 @@ public class BookControllerIntgrationTests {
     @Test
     public void shouldListBooksAndReturnListOfBooks() throws Exception {
         BookEntity testBookEntityA = TestDataUtil.createTestBookEntityA(null);
-        bookService.createBook(testBookEntityA.getIsbn(), testBookEntityA);
+        bookService.createOrUpdateBook(testBookEntityA.getIsbn(), testBookEntityA);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/books")
@@ -98,7 +98,7 @@ public class BookControllerIntgrationTests {
     @Test
     public void shouldGetBookAndReturn200WhenBookExists() throws Exception {
         BookEntity testBookEntityA = TestDataUtil.createTestBookEntityA(null);
-        bookService.createBook(testBookEntityA.getIsbn(), testBookEntityA);
+        bookService.createOrUpdateBook(testBookEntityA.getIsbn(), testBookEntityA);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/books/" + testBookEntityA.getIsbn())
@@ -110,7 +110,7 @@ public class BookControllerIntgrationTests {
     @Test
     public void shouldGetBookAndReturn404WhenBookDoesNotExist() throws Exception {
         BookEntity testBookEntityA = TestDataUtil.createTestBookEntityA(null);
-        bookService.createBook(testBookEntityA.getIsbn(), testBookEntityA);
+        bookService.createOrUpdateBook(testBookEntityA.getIsbn(), testBookEntityA);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/books/99")
@@ -122,7 +122,7 @@ public class BookControllerIntgrationTests {
     @Test
     public void shouldGetBookAndReturnBookWhenBookExists() throws Exception {
         BookEntity testBookEntityA = TestDataUtil.createTestBookEntityA(null);
-        bookService.createBook(testBookEntityA.getIsbn(), testBookEntityA);
+        bookService.createOrUpdateBook(testBookEntityA.getIsbn(), testBookEntityA);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/books/" + testBookEntityA.getIsbn())
@@ -134,6 +134,45 @@ public class BookControllerIntgrationTests {
                 MockMvcResultMatchers.jsonPath("$.title").value(testBookEntityA.getTitle())
         ).andExpect(
                 MockMvcResultMatchers.jsonPath("$.author").value(testBookEntityA.getAuthorEntity())
+        );
+    }
+
+    @Test
+    public void shouldUpdateBookAndReturn200() throws Exception {
+        BookEntity testBookEntity = TestDataUtil.createTestBookEntityA(null);
+        BookEntity savedBookEntity = bookService.createOrUpdateBook(testBookEntity.getIsbn(), testBookEntity);
+
+        BookDto testBookDto = TestDataUtil.createTestBookDtoA(null);
+        testBookDto.setIsbn(savedBookEntity.getIsbn());
+        String bookJson = objectMapper.writeValueAsString(testBookDto);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.put("/books/" + savedBookEntity.getIsbn())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(bookJson)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void shouldUpdateBookAndReturnBook() throws Exception {
+        BookEntity testBookEntity = TestDataUtil.createTestBookEntityA(null);
+        BookEntity savedBookEntity = bookService.createOrUpdateBook(testBookEntity.getIsbn(), testBookEntity);
+
+        BookDto testBookDto = TestDataUtil.createTestBookDtoA(null);
+        testBookDto.setIsbn(savedBookEntity.getIsbn());
+        testBookDto.setTitle("Harry Potter");
+        String bookJson = objectMapper.writeValueAsString(testBookDto);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.put("/books/" + savedBookEntity.getIsbn())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(bookJson)
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.isbn").value(testBookDto.getIsbn())
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.title").value(testBookDto.getTitle())
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.author").value(testBookDto.getAuthor())
         );
     }
 }
