@@ -1,5 +1,6 @@
 package com.lexie.springbootbooks.services;
 
+import com.lexie.springbootbooks.domain.dto.AuthorDto;
 import com.lexie.springbootbooks.domain.entities.AuthorEntity;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface AuthorService {
     Optional<AuthorEntity> findOne(Long id);
 
     boolean isExists(Long id);
+
+    AuthorEntity partialUpdate(Long id, AuthorEntity authorEntity);
 }
