@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController()
 @RequestMapping("/authors")
 public class AuthorController {
@@ -22,11 +25,19 @@ public class AuthorController {
         this.authorMapper = authorMapper;
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<AuthorDto> createAuthor(@RequestBody AuthorDto author) {
         AuthorEntity authorEntity = authorMapper.mapFrom(author);
         AuthorEntity savedAuthorEntity = authorService.createAuthor(authorEntity);
         AuthorDto savedAuthorDto = authorMapper.mapTo(savedAuthorEntity);
         return new ResponseEntity<>(savedAuthorDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public List<AuthorDto> listAuthors() {
+        List<AuthorEntity> authors = authorService.findAll();
+        return authors.stream()
+                .map(authorMapper::mapTo)
+                .collect(Collectors.toList());
     }
 }
